@@ -36,7 +36,7 @@ const Hero = () => {
 
   // Animated billiard balls for visual interest
   const balls = [
-    { type: 'cue', position: 'top-1/4 left-10', delay: 0 },
+    { type: 'cue' as const, position: 'top-1/4 left-10', delay: 0 },
     { type: 'solid' as const, color: 'red' as const, number: 3, position: 'bottom-1/3 right-20', delay: 2 },
     { type: 'stripe' as const, color: 'blue' as const, number: 10, position: 'top-1/3 right-1/4', delay: 1 },
     { type: 'solid' as const, color: 'green' as const, number: 6, position: 'bottom-1/4 left-1/3', delay: 3 },

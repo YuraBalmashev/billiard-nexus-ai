@@ -38,22 +38,24 @@ export const BilliardLoader = ({ className, size = 'md' }: BilliardLoaderProps) 
       ></div>
       
       {/* Adding animation to global styles in index.css */}
-      <style jsx global>{`
-        @keyframes billiardRoll {
-          0% {
-            left: 0%;
-            transform: translateY(0);
+      <style>
+        {`
+          @keyframes billiardRoll {
+            0% {
+              left: 0%;
+              transform: translateY(0);
+            }
+            50% {
+              left: 100%;
+              transform: translateY(0) translateX(-100%);
+            }
+            100% {
+              left: 0%;
+              transform: translateY(0);
+            }
           }
-          50% {
-            left: 100%;
-            transform: translateY(0) translateX(-100%);
-          }
-          100% {
-            left: 0%;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
+        `}
+      </style>
     </div>
   );
 };
