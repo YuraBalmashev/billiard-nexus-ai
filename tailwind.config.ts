@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -72,6 +71,10 @@ export default {
           lightGreen: '#27AE60',
           white: '#FFFFFF',
           offWhite: '#F5F5F7',
+          tableFelt: '#0b6e3d',
+          woodBrown: '#8B4513',
+          chalk: '#0092cc',
+          cueWood: '#d2b48c',
         },
 			},
 			borderRadius: {
@@ -133,6 +136,38 @@ export default {
           '50%': {
             opacity: '0.8'
           }
+        },
+        'billiard-roll': {
+          '0%, 100%': {
+            transform: 'translateX(0) rotate(0deg)'
+          },
+          '50%': {
+            transform: 'translateX(100%) rotate(360deg)'
+          }
+        },
+        'cue-strike': {
+          '0%': {
+            transform: 'translateX(-20px)'
+          },
+          '20%': {
+            transform: 'translateX(5px)'
+          },
+          '30%': {
+            transform: 'translateX(0)'
+          },
+          '100%': {
+            transform: 'translateX(0)'
+          }
+        },
+        'pocket-drop': {
+          '0%': {
+            transform: 'scale(1)',
+            opacity: '1'
+          },
+          '100%': {
+            transform: 'scale(0)',
+            opacity: '0'
+          }
         }
 			},
 			animation: {
@@ -141,7 +176,10 @@ export default {
         'fade-in': 'fade-in 0.7s ease-out forwards',
         'slide-in': 'slide-in 0.7s ease-out forwards',
         'zoom-in': 'zoom-in 0.7s ease-out forwards',
-        'pulse-slow': 'pulse-slow 3s infinite'
+        'pulse-slow': 'pulse-slow 3s infinite',
+        'billiard-roll': 'billiard-roll 3s infinite ease-in-out',
+        'cue-strike': 'cue-strike 1.5s ease-out',
+        'pocket-drop': 'pocket-drop 0.8s forwards ease-in-out'
 			},
       fontFamily: {
         'sans': ['SF Pro Display', 'Inter', 'system-ui', 'sans-serif'],
@@ -150,13 +188,23 @@ export default {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'hero-pattern': 'linear-gradient(to bottom, rgba(18, 18, 18, 0.9), rgba(26, 26, 26, 0.95))',
+        'billiard-felt': 'radial-gradient(circle, rgba(13, 157, 88, 0.03) 1px, transparent 1px)',
+        'billiard-table': 'linear-gradient(to bottom, rgba(11, 110, 61, 0.8), rgba(13, 157, 88, 0.6))',
+        'cue-gradient': 'linear-gradient(90deg, #d2b48c, #e6ccb3, #d2b48c)',
       },
       boxShadow: {
         'glass': '0 4px 24px -2px rgba(0, 0, 0, 0.3)',
         'neon': '0 0 15px rgba(13, 157, 88, 0.5)',
+        'pocket': '0 0 10px 3px rgba(0, 0, 0, 0.4) inset',
+        'felt': '0 0 30px rgba(13, 157, 88, 0.2)',
       },
       backdropBlur: {
         'xs': '2px',
+      },
+      backgroundSize: {
+        'pattern-sm': '20px 20px',
+        'pattern-md': '50px 50px',
+        'pattern-lg': '100px 100px',
       }
 		}
 	},

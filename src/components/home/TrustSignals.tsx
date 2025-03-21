@@ -1,5 +1,7 @@
 
 import React from 'react';
+import { BilliardSeparator } from '@/components/ui/billiard-icon';
+import { BilliardBackground } from '@/components/ui/billiard-background';
 
 const TrustSignals = () => {
   // These would be replaced with actual partner logos
@@ -13,7 +15,7 @@ const TrustSignals = () => {
   ];
 
   return (
-    <section className="py-20 bg-billman-black">
+    <BilliardBackground intensity="light" className="py-20 bg-billman-black">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-10">
           <h3 className="text-xl md:text-2xl font-medium text-white">
@@ -21,14 +23,18 @@ const TrustSignals = () => {
           </h3>
         </div>
         
+        <BilliardSeparator className="mb-10" />
+        
         <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
           {partners.map((partner) => (
             <div key={partner.id} className="group">
               <div className="h-12 flex items-center justify-center px-6 grayscale opacity-60 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100">
                 {/* In a real implementation, this would be an image */}
                 {/* <img src={`/logos/${partner.id}.svg`} alt={partner.name} className="max-h-full" /> */}
-                <div className="glassmorphism rounded-md px-4 py-2 text-billman-lightGray group-hover:text-billman-green transition-colors duration-300">
+                <div className="glassmorphism rounded-md px-4 py-2 text-billman-lightGray group-hover:text-billman-green transition-colors duration-300 relative overflow-hidden">
                   {partner.name}
+                  {/* Subtle felt pattern overlay */}
+                  <div className="absolute inset-0 bg-billiard-felt opacity-5 bg-pattern-sm pointer-events-none"></div>
                 </div>
               </div>
             </div>
@@ -40,8 +46,11 @@ const TrustSignals = () => {
             Join the growing network of clubs and organizations that are transforming the billiards experience with BILLMAN's cutting-edge technology.
           </p>
         </div>
+        
+        {/* Decorative cue stick divider */}
+        <div className="cue-divider mt-16"></div>
       </div>
-    </section>
+    </BilliardBackground>
   );
 };
 
