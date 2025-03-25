@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -73,6 +74,7 @@ const Navbar = () => {
           </div>
           
           <div className="hidden md:flex items-center space-x-4">
+            <LanguageSwitcher />
             <Button variant="outline" className="border-billman-green text-billman-green hover:bg-billman-green/10">
               Log In
             </Button>
@@ -158,6 +160,7 @@ const Navbar = () => {
               >
                 Contact
               </NavLink>
+              <LanguageSwitcher isMobile={true} />
             </div>
             <div className="mt-6 flex flex-col space-y-3">
               <Button variant="outline" className="w-full border-billman-green text-billman-green hover:bg-billman-green/10">
