@@ -55,6 +55,11 @@ const Navbar = () => {
             }>
               For Clubs
             </NavLink>
+            <NavLink to="/games" className={({isActive}) => 
+              `animated-link py-2 transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
+            }>
+              My Games
+            </NavLink>
             <NavLink to="/about" className={({isActive}) => 
               `animated-link py-2 transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
             }>
@@ -125,6 +130,15 @@ const Navbar = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 For Clubs
+              </NavLink>
+              <NavLink 
+                to="/games" 
+                className={({isActive}) => 
+                  `py-2 px-4 rounded-md transition-colors ${isActive ? 'bg-billman-dark text-billman-green' : 'text-white hover:bg-billman-dark'}`
+                }
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                My Games
               </NavLink>
               <NavLink 
                 to="/about" 
