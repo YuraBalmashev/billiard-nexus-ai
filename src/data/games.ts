@@ -26,6 +26,8 @@ export interface Game {
   };
   videoUrl: string;
   events: GameEvent[];
+  recordedAt: number; // Timestamp when the game was recorded
+  isFavorite: boolean; // Whether the game is marked as favorite
 }
 
 export const gameHistory: Game[] = [
@@ -71,7 +73,9 @@ export const gameHistory: Game[] = [
         description: "Bank shot success",
         player: "Alex Smith"
       }
-    ]
+    ],
+    recordedAt: Date.now() - 48 * 60 * 60 * 1000, // 48 hours ago
+    isFavorite: false
   },
   {
     id: "game2",
@@ -107,7 +111,9 @@ export const gameHistory: Game[] = [
         description: "Smart safety play",
         player: "Sarah Johnson"
       }
-    ]
+    ],
+    recordedAt: Date.now() - 60 * 60 * 1000, // 1 hour ago
+    isFavorite: true
   },
   {
     id: "game3",
@@ -143,7 +149,9 @@ export const gameHistory: Game[] = [
         description: "Consecutive run of 5 balls",
         player: "Mike Wilson"
       }
-    ]
+    ],
+    recordedAt: Date.now() - 70 * 60 * 60 * 1000, // 70 hours ago
+    isFavorite: false
   },
   {
     id: "game4",
@@ -179,7 +187,9 @@ export const gameHistory: Game[] = [
         description: "Push shot foul",
         player: "Alex Smith"
       }
-    ]
+    ],
+    recordedAt: Date.now() - 30 * 60 * 1000, // 30 minutes ago
+    isFavorite: true
   }
 ];
 
@@ -187,3 +197,36 @@ export const gameHistory: Game[] = [
 export const getGameById = (id: string): Game | undefined => {
   return gameHistory.find(game => game.id === id);
 };
+
+// Helper function to calculate remaining storage time
+export const getRemainingStorageTime = (recordedAt: number): { value: number; unit: 'h' | 'm' } => {
+  const now = Date.now();
+  const elapsedMs = now - recordedAt;
+  const storageTimeMs = 72 * 60 * 60 * 1000; // 72 hours in milliseconds
+  const remainingMs = storageTimeMs - elapsedMs;
+  
+  if (remainingMs <= 0) {
+    return { value: 0, unit: 'm' };
+  }
+  
+  const remainingHours = Math.floor(remainingMs / (60 * 60 * 1000));
+  
+  if (remainingHours >= 1) {
+    return { value: remainingHours, unit: 'h' };
+  } else {
+    const remainingMinutes = Math.max(1, Math.floor(remainingMs / (60 * 1000)));
+    return { value: remainingMinutes, unit: 'm' };
+  }
+};
+
+// Mock user storage limits and usage
+export const userStorageData = {
+  maxStorage: 50, // Maximum number of games that can be saved
+  currentUsage: 2, // Current number of saved games
+};
+
+// Game types for filtering
+export const gameTypes = ["Russian Pyramid", "9-Ball", "Straight Pool", "8-Ball", "Snooker"];
+
+// Venues for filtering
+export const venues = ["Elite Billiards Club", "Pro Cue Academy", "Master Billiards League", "Downtown Billiards"];

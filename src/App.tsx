@@ -13,6 +13,7 @@ import ContactPage from "./pages/Contact";
 import GamesPage from "./pages/Games";
 import GameDetailsPage from "./pages/GameDetails";
 import NotFound from "./pages/NotFound";
+import { GamesProvider } from "./contexts/GamesContext";
 
 const queryClient = new QueryClient();
 
