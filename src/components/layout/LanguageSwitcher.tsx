@@ -11,7 +11,7 @@ interface LanguageSwitcherProps {
 }
 
 const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ isMobile = false }) => {
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
   const { toast } = useToast();
   
   const toggleLanguage = () => {
@@ -19,8 +19,8 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ isMobile = false })
     setLanguage(newLanguage);
     
     toast({
-      title: 'Language Changed',
-      description: `Language switched to ${newLanguage === 'EN' ? 'English' : 'Russian'}`,
+      title: t('languageChanged'),
+      description: t('switchedTo'),
       duration: 2000,
     });
   };

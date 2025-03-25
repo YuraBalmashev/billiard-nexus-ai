@@ -4,10 +4,12 @@ import { NavLink, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import LanguageSwitcher from './LanguageSwitcher';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,47 +41,47 @@ const Navbar = () => {
             <NavLink to="/" className={({isActive}) => 
               `animated-link py-2 transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
             }>
-              Home
+              {t('home')}
             </NavLink>
             <NavLink to="/features" className={({isActive}) => 
               `animated-link py-2 transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
             }>
-              Features
+              {t('features')}
             </NavLink>
             <NavLink to="/pricing" className={({isActive}) => 
               `animated-link py-2 transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
             }>
-              Pricing
+              {t('pricing')}
             </NavLink>
             <NavLink to="/clubs" className={({isActive}) => 
               `animated-link py-2 transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
             }>
-              For Clubs
+              {t('forClubs')}
             </NavLink>
             <NavLink to="/games" className={({isActive}) => 
               `animated-link py-2 transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
             }>
-              My Games
+              {t('myGames')}
             </NavLink>
             <NavLink to="/about" className={({isActive}) => 
               `animated-link py-2 transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
             }>
-              About
+              {t('about')}
             </NavLink>
             <NavLink to="/contact" className={({isActive}) => 
               `animated-link py-2 transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
             }>
-              Contact
+              {t('contact')}
             </NavLink>
           </div>
           
           <div className="hidden md:flex items-center space-x-4">
             <LanguageSwitcher />
             <Button variant="outline" className="border-billman-green text-billman-green hover:bg-billman-green/10">
-              Log In
+              {t('login')}
             </Button>
             <Button className="bg-billman-green hover:bg-billman-lightGreen text-white">
-              Register
+              {t('register')}
             </Button>
           </div>
           
@@ -104,7 +106,7 @@ const Navbar = () => {
                 }
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Home
+                {t('home')}
               </NavLink>
               <NavLink 
                 to="/features" 
@@ -113,7 +115,7 @@ const Navbar = () => {
                 }
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Features
+                {t('features')}
               </NavLink>
               <NavLink 
                 to="/pricing" 
@@ -122,7 +124,7 @@ const Navbar = () => {
                 }
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Pricing
+                {t('pricing')}
               </NavLink>
               <NavLink 
                 to="/clubs" 
@@ -131,7 +133,7 @@ const Navbar = () => {
                 }
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                For Clubs
+                {t('forClubs')}
               </NavLink>
               <NavLink 
                 to="/games" 
@@ -140,7 +142,7 @@ const Navbar = () => {
                 }
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                My Games
+                {t('myGames')}
               </NavLink>
               <NavLink 
                 to="/about" 
@@ -149,7 +151,7 @@ const Navbar = () => {
                 }
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                About
+                {t('about')}
               </NavLink>
               <NavLink 
                 to="/contact" 
@@ -158,16 +160,16 @@ const Navbar = () => {
                 }
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Contact
+                {t('contact')}
               </NavLink>
               <LanguageSwitcher isMobile={true} />
             </div>
             <div className="mt-6 flex flex-col space-y-3">
               <Button variant="outline" className="w-full border-billman-green text-billman-green hover:bg-billman-green/10">
-                Log In
+                {t('login')}
               </Button>
               <Button className="w-full bg-billman-green hover:bg-billman-lightGreen text-white">
-                Register
+                {t('register')}
               </Button>
             </div>
           </div>
