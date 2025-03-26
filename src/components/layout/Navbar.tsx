@@ -2,14 +2,17 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, User } from 'lucide-react';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useAuth } from '@/contexts/AuthContext';
+import AuthModal from '@/components/auth/AuthModal';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { t } = useLanguage();
+  const { isAuthenticated, user } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -77,12 +80,21 @@ const Navbar = () => {
           
           <div className="hidden md:flex items-center space-x-4">
             <LanguageSwitcher />
-            <Button variant="outline" className="border-billman-green text-billman-green hover:bg-billman-green/10">
-              {t('login')}
-            </Button>
-            <Button className="bg-billman-green hover:bg-billman-lightGreen text-white">
-              {t('register')}
-            </Button>
+            
+            {isAuthenticated ? (
+              <Button 
+                variant="outline" 
+                className="border-billman-green text-billman-green hover:bg-billman-green/10"
+                asChild
+              >
+                <Link to="/profile">
+                  <User size={16} className="mr-2" />
+                  {user?.username || t('profile')}
+                </Link>
+              </Button>
+            ) : (
+              <AuthModal />
+            )}
           </div>
           
           {/* Mobile Menu Button */}
@@ -162,15 +174,28 @@ const Navbar = () => {
               >
                 {t('contact')}
               </NavLink>
+              
+              {isAuthenticated && (
+                <NavLink 
+                  to="/profile" 
+                  className={({isActive}) => 
+                    `py-2 px-4 rounded-md transition-colors ${isActive ? 'bg-billman-dark text-billman-green' : 'text-white hover:bg-billman-dark'}`
+                  }
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {t('profile')}
+                </NavLink>
+              )}
+              
               <LanguageSwitcher isMobile={true} />
             </div>
+            
             <div className="mt-6 flex flex-col space-y-3">
-              <Button variant="outline" className="w-full border-billman-green text-billman-green hover:bg-billman-green/10">
-                {t('login')}
-              </Button>
-              <Button className="w-full bg-billman-green hover:bg-billman-lightGreen text-white">
-                {t('register')}
-              </Button>
+              {!isAuthenticated && (
+                <div className="w-full">
+                  <AuthModal />
+                </div>
+              )}
             </div>
           </div>
         )}

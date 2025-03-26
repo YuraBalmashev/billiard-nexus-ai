@@ -23,6 +23,29 @@ const translations: Translations = {
   // Auth
   login: { EN: 'Log In', RU: 'Вход' },
   register: { EN: 'Register', RU: 'Регистрация' },
+  email: { EN: 'Email', RU: 'Эл. почта' },
+  password: { EN: 'Password', RU: 'Пароль' },
+  confirmPassword: { EN: 'Confirm Password', RU: 'Подтвердите пароль' },
+  username: { EN: 'Username', RU: 'Имя пользователя' },
+  usernamePlaceholder: { EN: 'Your username', RU: 'Ваше имя пользователя' },
+  loggingIn: { EN: 'Logging in...', RU: 'Вход...' },
+  registering: { EN: 'Registering...', RU: 'Регистрация...' },
+  loginSuccess: { EN: 'Login Successful', RU: 'Вход выполнен' },
+  welcomeBack: { EN: 'Welcome back!', RU: 'С возвращением!' },
+  loginFailed: { EN: 'Login Failed', RU: 'Ошибка входа' },
+  invalidCredentials: { EN: 'Invalid email or password', RU: 'Неверный email или пароль' },
+  registerSuccess: { EN: 'Registration Successful', RU: 'Регистрация успешна' },
+  accountCreated: { EN: 'Your account has been created', RU: 'Ваш аккаунт создан' },
+  registerFailed: { EN: 'Registration Failed', RU: 'Ошибка регистрации' },
+  passwordsDontMatch: { EN: 'Passwords do not match', RU: 'Пароли не совпадают' },
+  registrationError: { EN: 'Error creating account', RU: 'Ошибка при создании аккаунта' },
+  somethingWentWrong: { EN: 'Something went wrong', RU: 'Что-то пошло не так' },
+  
+  // Profile
+  profile: { EN: 'Profile', RU: 'Профиль' },
+  myProfile: { EN: 'My Profile', RU: 'Мой профиль' },
+  logout: { EN: 'Log out', RU: 'Выйти' },
+  language: { EN: 'Language', RU: 'Язык' },
   
   // Language
   languageChanged: { EN: 'Language Changed', RU: 'Язык изменен' },
