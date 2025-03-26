@@ -1,17 +1,17 @@
 
 import React from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import LanguageSwitcher from '@/components/layout/LanguageSwitcher';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { LogOut, User } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Profile = () => {
   const { user, logout } = useAuth();
-  const { t } = useLanguage();
+  const { t } = useTranslation();
 
   if (!user) return null;
 
@@ -21,7 +21,7 @@ const Profile = () => {
       
       <main className="flex-1 container mx-auto px-4 pt-24 pb-16">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8">{t('myProfile')}</h1>
+          <h1 className="text-3xl font-bold mb-8">{t('profile.myProfile')}</h1>
           
           <div className="bg-billman-dark/50 rounded-lg p-6 mb-8 backdrop-blur-sm">
             <div className="flex flex-col md:flex-row items-center gap-6 mb-6">
@@ -42,7 +42,7 @@ const Profile = () => {
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="w-full sm:w-auto flex flex-col sm:flex-row items-center gap-4">
                   <div className="flex items-center gap-2">
-                    <span className="text-billman-white/70">{t('language')}:</span>
+                    <span className="text-billman-white/70">{t('profile.language')}:</span>
                     <LanguageSwitcher />
                   </div>
                 </div>
@@ -53,7 +53,7 @@ const Profile = () => {
                   onClick={logout}
                 >
                   <LogOut size={16} className="mr-2" />
-                  {t('logout')}
+                  {t('auth.logout')}
                 </Button>
               </div>
             </div>

@@ -4,15 +4,15 @@ import { NavLink, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X, User } from 'lucide-react';
 import LanguageSwitcher from './LanguageSwitcher';
-import { useLanguage } from '@/contexts/LanguageContext';
 import { useAuth } from '@/contexts/AuthContext';
 import AuthModal from '@/components/auth/AuthModal';
+import { useTranslation } from 'react-i18next';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { t } = useLanguage();
   const { isAuthenticated, user } = useAuth();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,37 +44,37 @@ const Navbar = () => {
             <NavLink to="/" className={({isActive}) => 
               `animated-link py-2 transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
             }>
-              {t('home')}
+              {t('navigation.home')}
             </NavLink>
             <NavLink to="/features" className={({isActive}) => 
               `animated-link py-2 transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
             }>
-              {t('features')}
+              {t('navigation.features')}
             </NavLink>
             <NavLink to="/pricing" className={({isActive}) => 
               `animated-link py-2 transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
             }>
-              {t('pricing')}
+              {t('navigation.pricing')}
             </NavLink>
             <NavLink to="/clubs" className={({isActive}) => 
               `animated-link py-2 transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
             }>
-              {t('forClubs')}
+              {t('navigation.forClubs')}
             </NavLink>
             <NavLink to="/games" className={({isActive}) => 
               `animated-link py-2 transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
             }>
-              {t('myGames')}
+              {t('navigation.myGames')}
             </NavLink>
             <NavLink to="/about" className={({isActive}) => 
               `animated-link py-2 transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
             }>
-              {t('about')}
+              {t('navigation.about')}
             </NavLink>
             <NavLink to="/contact" className={({isActive}) => 
               `animated-link py-2 transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
             }>
-              {t('contact')}
+              {t('navigation.contact')}
             </NavLink>
           </div>
           
@@ -89,7 +89,7 @@ const Navbar = () => {
               >
                 <Link to="/profile">
                   <User size={16} className="mr-2" />
-                  {user?.username || t('profile')}
+                  {user?.username || t('navigation.profile')}
                 </Link>
               </Button>
             ) : (
@@ -118,7 +118,7 @@ const Navbar = () => {
                 }
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {t('home')}
+                {t('navigation.home')}
               </NavLink>
               <NavLink 
                 to="/features" 
@@ -127,7 +127,7 @@ const Navbar = () => {
                 }
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {t('features')}
+                {t('navigation.features')}
               </NavLink>
               <NavLink 
                 to="/pricing" 
@@ -136,7 +136,7 @@ const Navbar = () => {
                 }
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {t('pricing')}
+                {t('navigation.pricing')}
               </NavLink>
               <NavLink 
                 to="/clubs" 
@@ -145,7 +145,7 @@ const Navbar = () => {
                 }
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {t('forClubs')}
+                {t('navigation.forClubs')}
               </NavLink>
               <NavLink 
                 to="/games" 
@@ -154,7 +154,7 @@ const Navbar = () => {
                 }
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {t('myGames')}
+                {t('navigation.myGames')}
               </NavLink>
               <NavLink 
                 to="/about" 
@@ -163,7 +163,7 @@ const Navbar = () => {
                 }
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {t('about')}
+                {t('navigation.about')}
               </NavLink>
               <NavLink 
                 to="/contact" 
@@ -172,7 +172,7 @@ const Navbar = () => {
                 }
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {t('contact')}
+                {t('navigation.contact')}
               </NavLink>
               
               {isAuthenticated && (
@@ -183,7 +183,7 @@ const Navbar = () => {
                   }
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {t('profile')}
+                  {t('navigation.profile')}
                 </NavLink>
               )}
               

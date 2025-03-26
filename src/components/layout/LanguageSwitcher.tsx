@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -11,19 +11,26 @@ interface LanguageSwitcherProps {
 }
 
 const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ isMobile = false }) => {
-  const { language, setLanguage, t } = useLanguage();
+  const { i18n, t } = useTranslation();
   const { toast } = useToast();
   
   const toggleLanguage = () => {
-    const newLanguage = language === 'EN' ? 'RU' : 'EN';
-    setLanguage(newLanguage);
+    const currentLanguage = i18n.language;
+    const newLanguage = currentLanguage === 'en' ? 'ru' : 'en';
+    i18n.changeLanguage(newLanguage);
     
+    const toastMessage = newLanguage === 'en' 
+      ? t('language.switchedToEnglish') 
+      : t('language.switchedToRussian');
+      
     toast({
-      title: t('languageChanged'),
-      description: t('switchedTo'),
+      title: t('language.languageChanged'),
+      description: toastMessage,
       duration: 2000,
     });
   };
+
+  const displayLanguage = i18n.language === 'en' ? 'RUS' : 'ENG';
 
   if (isMobile) {
     return (
@@ -33,7 +40,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ isMobile = false })
         onClick={toggleLanguage}
       >
         <Globe size={20} className="mr-2" />
-        <span>{language === 'EN' ? 'RUS' : 'ENG'}</span>
+        <span>{displayLanguage}</span>
       </Button>
     );
   }
@@ -49,7 +56,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ isMobile = false })
       )}
     >
       <Globe size={14} />
-      <span className="font-medium">{language === 'EN' ? 'RUS' : 'ENG'}</span>
+      <span className="font-medium">{displayLanguage}</span>
     </Button>
   );
 };

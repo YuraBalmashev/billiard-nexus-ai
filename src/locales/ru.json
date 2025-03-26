@@ -1,0 +1,50 @@
+
+{
+  "navigation": {
+    "home": "Главная",
+    "features": "Возможности",
+    "pricing": "Цены",
+    "forClubs": "Для клубов",
+    "myGames": "Мои игры",
+    "about": "О нас",
+    "contact": "Контакты",
+    "profile": "Профиль"
+  },
+  "auth": {
+    "login": "Вход",
+    "register": "Регистрация",
+    "email": "Эл. почта",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "username": "Имя пользователя",
+    "usernamePlaceholder": "Ваше имя пользователя",
+    "loggingIn": "Вход...",
+    "registering": "Регистрация...",
+    "loginSuccess": "Вход выполнен",
+    "welcomeBack": "С возвращением!",
+    "loginFailed": "Ошибка входа",
+    "invalidCredentials": "Неверный email или пароль",
+    "registerSuccess": "Регистрация успешна",
+    "accountCreated": "Ваш аккаунт создан",
+    "registerFailed": "Ошибка регистрации",
+    "passwordsDontMatch": "Пароли не совпадают",
+    "registrationError": "Ошибка при создании аккаунта",
+    "somethingWentWrong": "Что-то пошло не так",
+    "logout": "Выйти"
+  },
+  "profile": {
+    "myProfile": "Мой профиль",
+    "language": "Язык"
+  },
+  "language": {
+    "languageChanged": "Язык изменен",
+    "switchedToEnglish": "Язык переключен на Английский",
+    "switchedToRussian": "Язык переключен на Русский"
+  },
+  "common": {
+    "search": "Поиск",
+    "clear": "Очистить",
+    "view": "Смотреть",
+    "details": "Подробнее"
+  }
+}

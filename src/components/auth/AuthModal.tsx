@@ -11,7 +11,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
-import { useLanguage } from '@/contexts/LanguageContext';
 import { 
   Form, 
   FormControl, 
@@ -21,6 +20,7 @@ import {
   FormMessage 
 } from '@/components/ui/form';
 import { Loader2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface LoginFormData {
   email: string;
@@ -40,7 +40,7 @@ const AuthModal = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const { login, register } = useAuth();
-  const { t } = useLanguage();
+  const { t } = useTranslation();
   
   // Login form
   const loginForm = useForm<LoginFormData>({
@@ -67,20 +67,20 @@ const AuthModal = () => {
       if (success) {
         setOpen(false);
         toast({
-          title: t('loginSuccess'),
-          description: t('welcomeBack'),
+          title: t('auth.loginSuccess'),
+          description: t('auth.welcomeBack'),
         });
       } else {
         toast({
-          title: t('loginFailed'),
-          description: t('invalidCredentials'),
+          title: t('auth.loginFailed'),
+          description: t('auth.invalidCredentials'),
           variant: 'destructive',
         });
       }
     } catch (error) {
       toast({
-        title: t('loginFailed'),
-        description: t('somethingWentWrong'),
+        title: t('auth.loginFailed'),
+        description: t('auth.somethingWentWrong'),
         variant: 'destructive',
       });
     } finally {
@@ -91,8 +91,8 @@ const AuthModal = () => {
   const onRegisterSubmit = async (data: RegisterFormData) => {
     if (data.password !== data.confirmPassword) {
       toast({
-        title: t('registerFailed'),
-        description: t('passwordsDontMatch'),
+        title: t('auth.registerFailed'),
+        description: t('auth.passwordsDontMatch'),
         variant: 'destructive',
       });
       return;
@@ -104,20 +104,20 @@ const AuthModal = () => {
       if (success) {
         setOpen(false);
         toast({
-          title: t('registerSuccess'),
-          description: t('accountCreated'),
+          title: t('auth.registerSuccess'),
+          description: t('auth.accountCreated'),
         });
       } else {
         toast({
-          title: t('registerFailed'),
-          description: t('registrationError'),
+          title: t('auth.registerFailed'),
+          description: t('auth.registrationError'),
           variant: 'destructive',
         });
       }
     } catch (error) {
       toast({
-        title: t('registerFailed'),
-        description: t('somethingWentWrong'),
+        title: t('auth.registerFailed'),
+        description: t('auth.somethingWentWrong'),
         variant: 'destructive',
       });
     } finally {
@@ -129,7 +129,7 @@ const AuthModal = () => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button className="bg-billman-green hover:bg-billman-lightGreen text-white">
-          {t('login')}
+          {t('auth.login')}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
@@ -140,8 +140,8 @@ const AuthModal = () => {
           className="w-full"
         >
           <TabsList className="grid w-full grid-cols-2 mb-6">
-            <TabsTrigger value="login">{t('login')}</TabsTrigger>
-            <TabsTrigger value="register">{t('register')}</TabsTrigger>
+            <TabsTrigger value="login">{t('auth.login')}</TabsTrigger>
+            <TabsTrigger value="register">{t('auth.register')}</TabsTrigger>
           </TabsList>
           
           <TabsContent value="login">
@@ -152,7 +152,7 @@ const AuthModal = () => {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t('email')}</FormLabel>
+                      <FormLabel>{t('auth.email')}</FormLabel>
                       <FormControl>
                         <Input placeholder="your.email@example.com" {...field} />
                       </FormControl>
@@ -166,7 +166,7 @@ const AuthModal = () => {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t('password')}</FormLabel>
+                      <FormLabel>{t('auth.password')}</FormLabel>
                       <FormControl>
                         <Input type="password" placeholder="••••••••" {...field} />
                       </FormControl>
@@ -183,10 +183,10 @@ const AuthModal = () => {
                   {isLoading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      {t('loggingIn')}
+                      {t('auth.loggingIn')}
                     </>
                   ) : (
-                    t('login')
+                    t('auth.login')
                   )}
                 </Button>
               </form>
@@ -201,9 +201,9 @@ const AuthModal = () => {
                   name="username"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t('username')}</FormLabel>
+                      <FormLabel>{t('auth.username')}</FormLabel>
                       <FormControl>
-                        <Input placeholder={t('usernamePlaceholder')} {...field} />
+                        <Input placeholder={t('auth.usernamePlaceholder')} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -215,7 +215,7 @@ const AuthModal = () => {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t('email')}</FormLabel>
+                      <FormLabel>{t('auth.email')}</FormLabel>
                       <FormControl>
                         <Input placeholder="your.email@example.com" {...field} />
                       </FormControl>
@@ -229,7 +229,7 @@ const AuthModal = () => {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t('password')}</FormLabel>
+                      <FormLabel>{t('auth.password')}</FormLabel>
                       <FormControl>
                         <Input type="password" placeholder="••••••••" {...field} />
                       </FormControl>
@@ -243,7 +243,7 @@ const AuthModal = () => {
                   name="confirmPassword"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t('confirmPassword')}</FormLabel>
+                      <FormLabel>{t('auth.confirmPassword')}</FormLabel>
                       <FormControl>
                         <Input type="password" placeholder="••••••••" {...field} />
                       </FormControl>
@@ -260,10 +260,10 @@ const AuthModal = () => {
                   {isLoading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      {t('registering')}
+                      {t('auth.registering')}
                     </>
                   ) : (
-                    t('register')
+                    t('auth.register')
                   )}
                 </Button>
               </form>

@@ -1,0 +1,50 @@
+
+{
+  "navigation": {
+    "home": "Home",
+    "features": "Features",
+    "pricing": "Pricing",
+    "forClubs": "For Clubs",
+    "myGames": "My Games",
+    "about": "About",
+    "contact": "Contact",
+    "profile": "Profile"
+  },
+  "auth": {
+    "login": "Log In",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "username": "Username",
+    "usernamePlaceholder": "Your username",
+    "loggingIn": "Logging in...",
+    "registering": "Registering...",
+    "loginSuccess": "Login Successful",
+    "welcomeBack": "Welcome back!",
+    "loginFailed": "Login Failed",
+    "invalidCredentials": "Invalid email or password",
+    "registerSuccess": "Registration Successful",
+    "accountCreated": "Your account has been created",
+    "registerFailed": "Registration Failed",
+    "passwordsDontMatch": "Passwords do not match",
+    "registrationError": "Error creating account",
+    "somethingWentWrong": "Something went wrong",
+    "logout": "Log out"
+  },
+  "profile": {
+    "myProfile": "My Profile",
+    "language": "Language"
+  },
+  "language": {
+    "languageChanged": "Language Changed",
+    "switchedToEnglish": "Language switched to English",
+    "switchedToRussian": "Language switched to Russian"
+  },
+  "common": {
+    "search": "Search",
+    "clear": "Clear",
+    "view": "View",
+    "details": "Details"
+  }
+}
