@@ -11,12 +11,15 @@ import {
   SidebarMenu, 
   SidebarMenuItem, 
   SidebarMenuButton,
-  SidebarFooter
+  SidebarFooter,
+  SidebarTrigger
 } from '@/components/ui/sidebar';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const PlayerDashboardSidebar = () => {
   const { t } = useTranslation();
   const { user, logout } = useAuth();
+  const isMobile = useIsMobile();
   
   const navItems = [
     {
@@ -37,7 +40,10 @@ const PlayerDashboardSidebar = () => {
   ];
 
   return (
-    <Sidebar className="min-h-screen border-r border-billman-dark">
+    <Sidebar 
+      className="min-h-screen border-r border-billman-dark"
+      collapsible={isMobile ? "offcanvas" : "icon"}
+    >
       <SidebarContent className="pt-6">
         <div className="px-4 mb-8">
           <div className="flex items-center gap-3 mb-4">
@@ -48,8 +54,8 @@ const PlayerDashboardSidebar = () => {
               </AvatarFallback>
             </Avatar>
             <div>
-              <h3 className="text-sm font-medium text-white">{user?.username}</h3>
-              <p className="text-xs text-billman-lightGray">{user?.email}</p>
+              <h3 className="text-sm font-medium text-white line-clamp-1">{user?.username}</h3>
+              <p className="text-xs text-billman-lightGray line-clamp-1">{user?.email}</p>
             </div>
           </div>
         </div>

@@ -5,7 +5,8 @@ export const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   const handleResize = useCallback(() => {
-    setIsMobile(window.innerWidth < 768);
+    // Change from 768px to 1024px for better tablet/mobile distinction
+    setIsMobile(window.innerWidth < 1024);
   }, []);
 
   useEffect(() => {
