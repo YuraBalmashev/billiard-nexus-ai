@@ -17,6 +17,10 @@ import NotFound from "./pages/NotFound";
 import { GamesProvider } from "./contexts/GamesContext";
 import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import PlayerDashboardLayout from "./pages/dashboard/player/Layout";
+import PlayerDashboardOverview from "./pages/dashboard/player/Overview";
+import PlayerDashboardGames from "./pages/dashboard/player/Games";
+import PlayerDashboardSettings from "./pages/dashboard/player/Settings";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +48,21 @@ const App = () => (
                 </ProtectedRoute>
               } 
             />
+            
+            {/* Player Dashboard Routes */}
+            <Route 
+              path="/dashboard/player" 
+              element={
+                <ProtectedRoute>
+                  <PlayerDashboardLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<PlayerDashboardOverview />} />
+              <Route path="games" element={<PlayerDashboardGames />} />
+              <Route path="settings" element={<PlayerDashboardSettings />} />
+            </Route>
+            
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

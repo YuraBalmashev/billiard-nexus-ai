@@ -36,6 +36,43 @@
     "myProfile": "Мой профиль",
     "language": "Язык"
   },
+  "dashboard": {
+    "player": {
+      "welcome": "Добро пожаловать, {{username}}",
+      "subtitle": "Проверьте вашу статистику и недавние игры"
+    },
+    "nav": {
+      "overview": "Обзор",
+      "myGames": "Мои игры",
+      "settings": "Настройки",
+      "logout": "Выйти"
+    },
+    "overview": {
+      "stats": "Статистика производительности",
+      "totalGames": "Всего игр",
+      "wins": "Победы",
+      "losses": "Поражения",
+      "accuracy": "Точность",
+      "recentGames": "Недавние игры",
+      "date": "Дата",
+      "opponent": "Соперник",
+      "result": "Результат",
+      "score": "Счет",
+      "win": "Победа",
+      "loss": "Поражение"
+    },
+    "games": {
+      "title": "Мои игры",
+      "history": "История игр",
+      "noGamesYet": "Отслеживайте и анализируйте все ваши игры в одном месте",
+      "emptyState": "Ваша история игр появится здесь"
+    },
+    "settings": {
+      "title": "Настройки",
+      "profile": "Мой профиль",
+      "role": "Роль"
+    }
+  },
   "language": {
     "languageChanged": "Язык изменен",
     "switchedToEnglish": "Язык переключен на Английский",

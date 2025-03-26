@@ -36,6 +36,43 @@
     "myProfile": "My Profile",
     "language": "Language"
   },
+  "dashboard": {
+    "player": {
+      "welcome": "Welcome, {{username}}",
+      "subtitle": "Check your performance and recent games"
+    },
+    "nav": {
+      "overview": "Overview",
+      "myGames": "My Games",
+      "settings": "Settings",
+      "logout": "Log out"
+    },
+    "overview": {
+      "stats": "Performance Stats",
+      "totalGames": "Total Games",
+      "wins": "Wins",
+      "losses": "Losses",
+      "accuracy": "Accuracy",
+      "recentGames": "Recent Games",
+      "date": "Date",
+      "opponent": "Opponent",
+      "result": "Result",
+      "score": "Score",
+      "win": "Win",
+      "loss": "Loss"
+    },
+    "games": {
+      "title": "My Games",
+      "history": "Game History",
+      "noGamesYet": "Track and analyze all your games in one place",
+      "emptyState": "Your game history will appear here"
+    },
+    "settings": {
+      "title": "Settings",
+      "profile": "My Profile",
+      "role": "Role"
+    }
+  },
   "language": {
     "languageChanged": "Language Changed",
     "switchedToEnglish": "Language switched to English",

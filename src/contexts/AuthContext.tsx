@@ -7,6 +7,7 @@ interface User {
   username: string;
   email: string;
   avatar?: string;
+  role: 'Player' | 'Coach' | 'Admin';
 }
 
 interface AuthContextType {
@@ -45,12 +46,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             id: '1',
             username: email.split('@')[0],
             email,
-            avatar: '/placeholder.svg'
+            avatar: '/placeholder.svg',
+            role: 'Player'
           };
           
           setUser(mockUser);
           localStorage.setItem('billman_user', JSON.stringify(mockUser));
-          navigate('/profile');
+          
+          // Redirect to dashboard for players
+          if (mockUser.role === 'Player') {
+            navigate('/dashboard/player');
+          } else {
+            navigate('/profile');
+          }
+          
           resolve(true);
         } else {
           resolve(false);
@@ -70,12 +79,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             id: '1',
             username,
             email,
-            avatar: '/placeholder.svg'
+            avatar: '/placeholder.svg',
+            role: 'Player'
           };
           
           setUser(mockUser);
           localStorage.setItem('billman_user', JSON.stringify(mockUser));
-          navigate('/profile');
+          
+          // Redirect to dashboard for players
+          if (mockUser.role === 'Player') {
+            navigate('/dashboard/player');
+          } else {
+            navigate('/profile');
+          }
+          
           resolve(true);
         } else {
           resolve(false);
