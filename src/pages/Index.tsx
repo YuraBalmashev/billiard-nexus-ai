@@ -8,8 +8,11 @@ import Pricing from '@/components/home/Pricing';
 import TrustSignals from '@/components/home/TrustSignals';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useTranslation } from 'react-i18next';
 
 const Index = () => {
+  const { t } = useTranslation();
+  
   return (
     <div className="flex flex-col min-h-screen bg-billman-black">
       <Navbar />
@@ -22,13 +25,13 @@ const Index = () => {
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <div className="inline-block px-3 py-1 rounded-full bg-billman-green/10 text-billman-green text-sm font-medium mb-4">
-                How It Works
+                {t('homepage.howItWorks.title')}
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-fade-in">
-                Intelligence Meets <span className="bg-gradient-to-r from-billman-green to-billman-lightGreen bg-clip-text text-transparent">Billiards</span>
+                <span className="bg-gradient-to-r from-billman-green to-billman-lightGreen bg-clip-text text-transparent">{t('homepage.howItWorks.subtitle')}</span>
               </h2>
               <p className="text-billman-lightGray text-lg animate-fade-in" style={{animationDelay: '0.1s'}}>
-                BILLMAN uses advanced computer vision and AI to revolutionize how you play, practice, and experience billiards.
+                {t('homepage.howItWorks.description')}
               </p>
             </div>
             
@@ -45,7 +48,7 @@ const Index = () => {
                           </div>
                         </div>
                       </div>
-                      <p className="text-billman-lightGray">Watch how BILLMAN works</p>
+                      <p className="text-billman-lightGray">{t('homepage.howItWorks.watchVideo')}</p>
                     </div>
                   </div>
                 </div>
@@ -58,8 +61,8 @@ const Index = () => {
                       <span className="text-billman-green font-medium">1</span>
                     </div>
                     <div>
-                      <h3 className="text-xl font-medium text-white mb-2">Set Up The Camera</h3>
-                      <p className="text-billman-lightGray">Position the BILLMAN camera above your billiards table to capture the entire playing surface.</p>
+                      <h3 className="text-xl font-medium text-white mb-2">{t('homepage.howItWorks.steps.setup.title')}</h3>
+                      <p className="text-billman-lightGray">{t('homepage.howItWorks.steps.setup.description')}</p>
                     </div>
                   </div>
                 </div>
@@ -70,8 +73,8 @@ const Index = () => {
                       <span className="text-billman-green font-medium">2</span>
                     </div>
                     <div>
-                      <h3 className="text-xl font-medium text-white mb-2">Connect To The App</h3>
-                      <p className="text-billman-lightGray">Pair your mobile device with the BILLMAN system using our intuitive mobile app.</p>
+                      <h3 className="text-xl font-medium text-white mb-2">{t('homepage.howItWorks.steps.connect.title')}</h3>
+                      <p className="text-billman-lightGray">{t('homepage.howItWorks.steps.connect.description')}</p>
                     </div>
                   </div>
                 </div>
@@ -82,8 +85,8 @@ const Index = () => {
                       <span className="text-billman-green font-medium">3</span>
                     </div>
                     <div>
-                      <h3 className="text-xl font-medium text-white mb-2">Play And Analyze</h3>
-                      <p className="text-billman-lightGray">Start playing while BILLMAN automatically tracks scores, detects fouls, and analyzes your performance in real-time.</p>
+                      <h3 className="text-xl font-medium text-white mb-2">{t('homepage.howItWorks.steps.play.title')}</h3>
+                      <p className="text-billman-lightGray">{t('homepage.howItWorks.steps.play.description')}</p>
                     </div>
                   </div>
                 </div>
@@ -107,18 +110,18 @@ const Index = () => {
           <div className="container mx-auto px-4 md:px-6 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 animate-fade-in">
-                Ready to Transform Your <span className="bg-gradient-to-r from-billman-green to-billman-lightGreen bg-clip-text text-transparent">Billiards Experience</span>?
+                <span className="bg-gradient-to-r from-billman-green to-billman-lightGreen bg-clip-text text-transparent">{t('homepage.cta.title')}</span>
               </h2>
               <p className="text-billman-lightGray text-lg mb-8 animate-fade-in" style={{animationDelay: '0.1s'}}>
-                Join thousands of players and clubs already using BILLMAN to revolutionize their game.
+                {t('homepage.cta.description')}
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in" style={{animationDelay: '0.2s'}}>
                 <Button className="bg-billman-green hover:bg-billman-lightGreen text-white px-8 py-6 rounded-md transition-all duration-300 shadow-glass hover:shadow-neon group w-full sm:w-auto">
-                  <span>Get Started Free</span>
+                  <span>{t('homepage.cta.primary')}</span>
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Button>
                 <Button variant="outline" className="border-billman-lightGray/30 text-white hover:bg-white/5 px-8 py-6 rounded-md w-full sm:w-auto">
-                  Contact Sales
+                  {t('homepage.cta.secondary')}
                 </Button>
               </div>
             </div>

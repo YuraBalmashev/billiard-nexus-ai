@@ -1,7 +1,10 @@
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const TrustSignals = () => {
+  const { t } = useTranslation();
+  
   // These would be replaced with actual partner logos
   const partners = [
     { name: "Elite Billiards Club", id: 1 },
@@ -17,7 +20,7 @@ const TrustSignals = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-10">
           <h3 className="text-xl md:text-2xl font-medium text-white">
-            Trusted by Leading Clubs and Organizations
+            {t('homepage.trust.title')}
           </h3>
         </div>
         
@@ -37,7 +40,7 @@ const TrustSignals = () => {
         
         <div className="mt-16 text-center">
           <p className="text-billman-lightGray max-w-2xl mx-auto">
-            Join the growing network of clubs and organizations that are transforming the billiards experience with BILLMAN's cutting-edge technology.
+            {t('homepage.trust.description')}
           </p>
         </div>
       </div>

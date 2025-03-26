@@ -2,8 +2,10 @@
 import React, { useEffect, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useTranslation } from 'react-i18next';
 
 const Hero = () => {
+  const { t } = useTranslation();
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -47,24 +49,24 @@ const Hero = () => {
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="max-w-5xl mx-auto text-center">
           <div className="inline-block mb-6 px-4 py-1 rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
-            <span className="text-sm font-medium text-billman-green">Revolutionizing Billiards with AI</span>
+            <span className="text-sm font-medium text-billman-green">{t('homepage.hero.tagline')}</span>
           </div>
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight md:leading-tight lg:leading-tight animate-fade-in">
-            The Future of <span className="bg-gradient-to-r from-billman-green to-billman-lightGreen bg-clip-text text-transparent">Billiards</span> Is Here
+            {t('homepage.hero.title')}
           </h1>
           
           <p className="text-lg md:text-xl text-billman-lightGray mb-8 max-w-3xl mx-auto animate-fade-in" style={{animationDelay: '0.2s'}}>
-            BILLMAN brings AI-powered analytics, remote tournaments, and interactive coaching to unite the entire billiards community in one ecosystem.
+            {t('homepage.hero.description')}
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in" style={{animationDelay: '0.4s'}}>
             <Button className="bg-billman-green hover:bg-billman-lightGreen text-white px-8 py-6 rounded-md transition-all duration-300 shadow-glass hover:shadow-neon group w-full sm:w-auto">
-              <span>Get Started Free</span>
+              <span>{t('homepage.hero.getStarted')}</span>
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
             <Button variant="outline" className="border-billman-lightGray/30 text-white hover:bg-white/5 px-8 py-6 rounded-md w-full sm:w-auto">
-              Watch Demo
+              {t('homepage.hero.watchDemo')}
             </Button>
           </div>
         </div>
@@ -73,15 +75,15 @@ const Hero = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 animate-fade-in" style={{animationDelay: '0.6s'}}>
           <div className="glassmorphism rounded-xl p-6 text-center">
             <div className="text-3xl font-bold text-billman-green mb-2">12,000+</div>
-            <p className="text-billman-lightGray">Active Players</p>
+            <p className="text-billman-lightGray">{t('homepage.stats.activePlayers')}</p>
           </div>
           <div className="glassmorphism rounded-xl p-6 text-center">
             <div className="text-3xl font-bold text-billman-green mb-2">250+</div>
-            <p className="text-billman-lightGray">Partner Clubs</p>
+            <p className="text-billman-lightGray">{t('homepage.stats.partnerClubs')}</p>
           </div>
           <div className="glassmorphism rounded-xl p-6 text-center">
             <div className="text-3xl font-bold text-billman-green mb-2">98%</div>
-            <p className="text-billman-lightGray">Accuracy Rate</p>
+            <p className="text-billman-lightGray">{t('homepage.stats.accuracyRate')}</p>
           </div>
         </div>
       </div>

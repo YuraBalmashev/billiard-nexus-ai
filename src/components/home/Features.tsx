@@ -1,43 +1,46 @@
 
 import React from 'react';
 import { Camera, Award, Users, BarChart, Calendar, Video } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Features = () => {
+  const { t } = useTranslation();
+
   const features = [
     {
       icon: <Camera className="h-8 w-8 text-billman-green" />,
-      title: "AI Score Tracking",
-      description: "Real-time automated score tracking and foul detection with computer vision technology.",
+      title: t('homepage.features.items.aiTracking.title'),
+      description: t('homepage.features.items.aiTracking.description'),
       delay: 0
     },
     {
       icon: <BarChart className="h-8 w-8 text-billman-green" />,
-      title: "Detailed Analytics",
-      description: "Comprehensive performance metrics and game analysis to improve your skills.",
+      title: t('homepage.features.items.analytics.title'),
+      description: t('homepage.features.items.analytics.description'),
       delay: 0.1
     },
     {
       icon: <Calendar className="h-8 w-8 text-billman-green" />,
-      title: "Online Tournaments",
-      description: "Participate in remote tournaments and events from anywhere in the world.",
+      title: t('homepage.features.items.tournaments.title'),
+      description: t('homepage.features.items.tournaments.description'),
       delay: 0.2
     },
     {
       icon: <Video className="h-8 w-8 text-billman-green" />,
-      title: "Interactive Lessons",
-      description: "Learn from professionals with our library of interactive coaching lessons.",
+      title: t('homepage.features.items.lessons.title'),
+      description: t('homepage.features.items.lessons.description'),
       delay: 0.3
     },
     {
       icon: <Users className="h-8 w-8 text-billman-green" />,
-      title: "Community Network",
-      description: "Connect with players and clubs to share experiences and organize games.",
+      title: t('homepage.features.items.community.title'),
+      description: t('homepage.features.items.community.description'),
       delay: 0.4
     },
     {
       icon: <Award className="h-8 w-8 text-billman-green" />,
-      title: "Skill Development",
-      description: "Track your progress and improve with personalized training recommendations.",
+      title: t('homepage.features.items.development.title'),
+      description: t('homepage.features.items.development.description'),
       delay: 0.5
     }
   ];
@@ -51,13 +54,13 @@ const Features = () => {
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-block px-3 py-1 rounded-full bg-billman-green/10 text-billman-green text-sm font-medium mb-4">
-            Core Features
+            {t('homepage.features.title')}
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-fade-in">
-            Advanced Technology for <span className="bg-gradient-to-r from-billman-green to-billman-lightGreen bg-clip-text text-transparent">Every Player</span>
+            <span className="bg-gradient-to-r from-billman-green to-billman-lightGreen bg-clip-text text-transparent">{t('homepage.features.subtitle')}</span>
           </h2>
           <p className="text-billman-lightGray text-lg animate-fade-in" style={{animationDelay: '0.1s'}}>
-            BILLMAN combines cutting-edge AI technology with billiards expertise to create the most comprehensive platform for players of all levels.
+            {t('homepage.features.description')}
           </p>
         </div>
         

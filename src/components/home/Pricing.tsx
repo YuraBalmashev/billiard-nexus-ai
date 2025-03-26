@@ -2,10 +2,12 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface PricingTier {
   name: string;
   price: string;
+  period?: string;
   description: string;
   features: string[];
   cta: string;
@@ -14,52 +16,34 @@ interface PricingTier {
 }
 
 const Pricing = () => {
+  const { t } = useTranslation();
+
   const pricingTiers: PricingTier[] = [
     {
-      name: "Guest",
-      price: "Free",
-      description: "Perfect for casual players looking to experience BILLMAN.",
-      features: [
-        "Basic game tracking",
-        "Limited analytics",
-        "Community access",
-        "Participate in public tournaments",
-        "1 training session per month"
-      ],
-      cta: "Sign Up Free",
+      name: t('homepage.pricing.tiers.free.name'),
+      price: t('homepage.pricing.tiers.free.price'),
+      description: t('homepage.pricing.tiers.free.description'),
+      features: t('homepage.pricing.tiers.free.features', { returnObjects: true }) as string[],
+      cta: t('homepage.pricing.tiers.free.cta'),
       delay: 0
     },
     {
-      name: "Lite",
-      price: "$9.99",
-      description: "For enthusiasts who want to improve their game consistently.",
-      features: [
-        "Advanced game tracking",
-        "Full performance analytics",
-        "Unlimited tournament participation",
-        "5 training sessions per month",
-        "Player networking",
-        "Shot recommendation system"
-      ],
-      cta: "Start with Lite",
+      name: t('homepage.pricing.tiers.lite.name'),
+      price: t('homepage.pricing.tiers.lite.price'),
+      period: t('homepage.pricing.tiers.lite.period'),
+      description: t('homepage.pricing.tiers.lite.description'),
+      features: t('homepage.pricing.tiers.lite.features', { returnObjects: true }) as string[],
+      cta: t('homepage.pricing.tiers.lite.cta'),
       popular: true,
       delay: 0.1
     },
     {
-      name: "Pro",
-      price: "$19.99",
-      description: "For serious players and professionals seeking complete features.",
-      features: [
-        "Premium game tracking",
-        "Advanced analytics with AI insights",
-        "Priority tournament access",
-        "Unlimited training sessions",
-        "Pro player networking",
-        "Coaching tools",
-        "Offline mode",
-        "Priority support"
-      ],
-      cta: "Upgrade to Pro",
+      name: t('homepage.pricing.tiers.pro.name'),
+      price: t('homepage.pricing.tiers.pro.price'),
+      period: t('homepage.pricing.tiers.pro.period'),
+      description: t('homepage.pricing.tiers.pro.description'),
+      features: t('homepage.pricing.tiers.pro.features', { returnObjects: true }) as string[],
+      cta: t('homepage.pricing.tiers.pro.cta'),
       delay: 0.2
     }
   ];
@@ -72,13 +56,13 @@ const Pricing = () => {
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-block px-3 py-1 rounded-full bg-billman-green/10 text-billman-green text-sm font-medium mb-4">
-            Pricing Plans
+            {t('homepage.pricing.title')}
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-fade-in">
-            Choose the Perfect <span className="bg-gradient-to-r from-billman-green to-billman-lightGreen bg-clip-text text-transparent">Plan</span> for You
+            <span className="bg-gradient-to-r from-billman-green to-billman-lightGreen bg-clip-text text-transparent">{t('homepage.pricing.subtitle')}</span>
           </h2>
           <p className="text-billman-lightGray text-lg animate-fade-in" style={{animationDelay: '0.1s'}}>
-            Select a subscription that fits your needs. All plans include core features with additional benefits as you upgrade.
+            {t('homepage.pricing.description')}
           </p>
         </div>
         
@@ -93,7 +77,7 @@ const Pricing = () => {
             >
               {tier.popular && (
                 <div className="absolute top-0 right-0 bg-billman-green text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
-                  Most Popular
+                  {t('homepage.pricing.tiers.lite.popular')}
                 </div>
               )}
               
@@ -101,7 +85,7 @@ const Pricing = () => {
                 <h3 className="text-xl font-bold text-white mb-1">{tier.name}</h3>
                 <div className="flex items-end mb-4">
                   <span className="text-4xl font-bold text-white">{tier.price}</span>
-                  {tier.price !== "Free" && <span className="text-billman-lightGray ml-2 mb-1">/month</span>}
+                  {tier.period && <span className="text-billman-lightGray ml-2 mb-1">{tier.period}</span>}
                 </div>
                 <p className="text-billman-lightGray mb-6">{tier.description}</p>
                 
@@ -117,7 +101,7 @@ const Pricing = () => {
               </div>
               
               <div className="p-8 bg-billman-dark">
-                <p className="text-sm text-billman-lightGray mb-4 font-medium">What's included:</p>
+                <p className="text-sm text-billman-lightGray mb-4 font-medium">{t('homepage.pricing.includes')}</p>
                 <ul className="space-y-3">
                   {tier.features.map((feature, i) => (
                     <li key={i} className="flex items-start">
@@ -133,10 +117,10 @@ const Pricing = () => {
         
         <div className="mt-16 text-center">
           <p className="text-billman-lightGray mb-4">
-            Need a custom solution for your club or tournament?
+            {t('homepage.pricing.enterprise')}
           </p>
           <Button variant="outline" className="border-billman-green text-billman-green hover:bg-billman-green/10">
-            Contact for Enterprise Pricing
+            {t('homepage.pricing.contactEnterprise')}
           </Button>
         </div>
       </div>

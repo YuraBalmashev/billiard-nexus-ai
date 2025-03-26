@@ -46,5 +46,136 @@
     "clear": "Clear",
     "view": "View",
     "details": "Details"
+  },
+  "homepage": {
+    "hero": {
+      "tagline": "Revolutionizing Billiards with AI",
+      "title": "The Future of Billiards Is Here",
+      "description": "BILLMAN brings AI-powered analytics, remote tournaments, and interactive coaching to unite the entire billiards community in one ecosystem.",
+      "getStarted": "Get Started Free",
+      "watchDemo": "Watch Demo"
+    },
+    "stats": {
+      "activePlayers": "Active Players",
+      "partnerClubs": "Partner Clubs",
+      "accuracyRate": "Accuracy Rate"
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "subtitle": "Intelligence Meets Billiards",
+      "description": "BILLMAN uses advanced computer vision and AI to revolutionize how you play, practice, and experience billiards.",
+      "watchVideo": "Watch how BILLMAN works",
+      "steps": {
+        "setup": {
+          "title": "Set Up The Camera",
+          "description": "Position the BILLMAN camera above your billiards table to capture the entire playing surface."
+        },
+        "connect": {
+          "title": "Connect To The App",
+          "description": "Pair your mobile device with the BILLMAN system using our intuitive mobile app."
+        },
+        "play": {
+          "title": "Play And Analyze",
+          "description": "Start playing while BILLMAN automatically tracks scores, detects fouls, and analyzes your performance in real-time."
+        }
+      }
+    },
+    "features": {
+      "title": "Core Features",
+      "subtitle": "Advanced Technology for Every Player",
+      "description": "BILLMAN combines cutting-edge AI technology with billiards expertise to create the most comprehensive platform for players of all levels.",
+      "items": {
+        "aiTracking": {
+          "title": "AI Score Tracking",
+          "description": "Real-time automated score tracking and foul detection with computer vision technology."
+        },
+        "analytics": {
+          "title": "Detailed Analytics",
+          "description": "Comprehensive performance metrics and game analysis to improve your skills."
+        },
+        "tournaments": {
+          "title": "Online Tournaments",
+          "description": "Participate in remote tournaments and events from anywhere in the world."
+        },
+        "lessons": {
+          "title": "Interactive Lessons",
+          "description": "Learn from professionals with our library of interactive coaching lessons."
+        },
+        "community": {
+          "title": "Community Network",
+          "description": "Connect with players and clubs to share experiences and organize games."
+        },
+        "development": {
+          "title": "Skill Development",
+          "description": "Track your progress and improve with personalized training recommendations."
+        }
+      }
+    },
+    "trust": {
+      "title": "Trusted by Leading Clubs and Organizations",
+      "description": "Join the growing network of clubs and organizations that are transforming the billiards experience with BILLMAN's cutting-edge technology."
+    },
+    "pricing": {
+      "title": "Pricing Plans",
+      "subtitle": "Choose the Perfect Plan for You",
+      "description": "Select a subscription that fits your needs. All plans include core features with additional benefits as you upgrade.",
+      "includes": "What's included:",
+      "enterprise": "Need a custom solution for your club or tournament?",
+      "contactEnterprise": "Contact for Enterprise Pricing",
+      "tiers": {
+        "free": {
+          "name": "Guest",
+          "price": "Free",
+          "description": "Perfect for casual players looking to experience BILLMAN.",
+          "cta": "Sign Up Free",
+          "features": [
+            "Basic game tracking",
+            "Limited analytics",
+            "Community access",
+            "Participate in public tournaments",
+            "1 training session per month"
+          ]
+        },
+        "lite": {
+          "name": "Lite",
+          "price": "$9.99",
+          "period": "/month",
+          "description": "For enthusiasts who want to improve their game consistently.",
+          "cta": "Start with Lite",
+          "popular": "Most Popular",
+          "features": [
+            "Advanced game tracking",
+            "Full performance analytics",
+            "Unlimited tournament participation",
+            "5 training sessions per month",
+            "Player networking",
+            "Shot recommendation system"
+          ]
+        },
+        "pro": {
+          "name": "Pro",
+          "price": "$19.99",
+          "period": "/month",
+          "description": "For serious players and professionals seeking complete features.",
+          "cta": "Upgrade to Pro",
+          "features": [
+            "Premium game tracking",
+            "Advanced analytics with AI insights",
+            "Priority tournament access",
+            "Unlimited training sessions",
+            "Pro player networking",
+            "Coaching tools",
+            "Offline mode",
+            "Priority support"
+          ]
+        }
+      }
+    },
+    "cta": {
+      "title": "Ready to Transform Your Billiards Experience?",
+      "description": "Join thousands of players and clubs already using BILLMAN to revolutionize their game.",
+      "primary": "Get Started Free",
+      "secondary": "Contact Sales"
+    }
   }
 }
