@@ -14,6 +14,13 @@ const PlayerDashboardLayout = () => {
   const { user } = useAuth();
   const isMobile = useIsMobile();
 
+  const toggleSidebar = () => {
+    const sidebarTrigger = document.querySelector('[data-sidebar="trigger"]');
+    if (sidebarTrigger instanceof HTMLElement) {
+      sidebarTrigger.click();
+    }
+  };
+
   return (
     <SidebarProvider>
       <div className="bg-billman-black min-h-screen">
@@ -24,7 +31,7 @@ const PlayerDashboardLayout = () => {
                 variant="ghost" 
                 size="icon" 
                 className="text-billman-lightGray hover:text-white mr-4"
-                onClick={() => document.querySelector('[data-sidebar="trigger"]')?.click()}
+                onClick={toggleSidebar}
               >
                 <Menu size={24} />
                 <span className="sr-only">Toggle menu</span>
