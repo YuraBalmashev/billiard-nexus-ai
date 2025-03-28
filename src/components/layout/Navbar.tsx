@@ -1,13 +1,19 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Menu, X, User } from 'lucide-react';
+import { Menu, X, User, ChevronDown } from 'lucide-react';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useAuth } from '@/contexts/AuthContext';
 import AuthModal from '@/components/auth/AuthModal';
 import { useTranslation } from 'react-i18next';
 import { useIsMobile } from '@/hooks/use-mobile';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -15,6 +21,45 @@ const Navbar = () => {
   const { isAuthenticated, user } = useAuth();
   const { t } = useTranslation();
   const isMobile = useIsMobile();
+  
+  // Define navigation items in a structure for easier management
+  const navItems = useMemo(() => [
+    { path: '/', label: t('navigation.home') },
+    { path: '/features', label: t('navigation.features') },
+    { path: '/pricing', label: t('navigation.pricing') },
+    { path: '/clubs', label: t('navigation.forClubs') },
+    { path: '/games', label: t('navigation.myGames') },
+    { path: '/about', label: t('navigation.about') },
+    { path: '/contact', label: t('navigation.contact') },
+  ], [t]);
+  
+  // State to track which items should be in the dropdown
+  const [itemsInDropdown, setItemsInDropdown] = useState<number>(0);
+  
+  // Function to check if an item should be in the dropdown
+  const shouldBeInDropdown = (index: number) => {
+    return index >= navItems.length - itemsInDropdown;
+  };
+  
+  // Check window size and adjust itemsInDropdown
+  useEffect(() => {
+    const handleResize = () => {
+      const windowWidth = window.innerWidth;
+      
+      // Adjust how many items go in dropdown based on screen width
+      if (windowWidth >= 1280) { // xl
+        setItemsInDropdown(0); // All items visible
+      } else if (windowWidth >= 1024) { // lg
+        setItemsInDropdown(1); // Last item in dropdown
+      } else if (windowWidth >= 900) { // Medium-sized screens
+        setItemsInDropdown(3); // Last 3 items in dropdown
+      }
+    };
+    
+    handleResize(); // Initial check
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [navItems.length]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,42 +88,53 @@ const Navbar = () => {
           
           {/* Desktop Navigation - only show on larger screens */}
           {!isMobile ? (
-            <div className="hidden md:flex items-center space-x-2 lg:space-x-8">
-              <NavLink to="/" className={({isActive}) => 
-                `animated-link py-1 px-1 lg:px-2 text-sm lg:text-base transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
-              }>
-                {t('navigation.home')}
-              </NavLink>
-              <NavLink to="/features" className={({isActive}) => 
-                `animated-link py-1 px-1 lg:px-2 text-sm lg:text-base transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
-              }>
-                {t('navigation.features')}
-              </NavLink>
-              <NavLink to="/pricing" className={({isActive}) => 
-                `animated-link py-1 px-1 lg:px-2 text-sm lg:text-base transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
-              }>
-                {t('navigation.pricing')}
-              </NavLink>
-              <NavLink to="/clubs" className={({isActive}) => 
-                `animated-link py-1 px-1 lg:px-2 text-sm lg:text-base transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
-              }>
-                {t('navigation.forClubs')}
-              </NavLink>
-              <NavLink to="/games" className={({isActive}) => 
-                `animated-link py-1 px-1 lg:px-2 text-sm lg:text-base transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
-              }>
-                {t('navigation.myGames')}
-              </NavLink>
-              <NavLink to="/about" className={({isActive}) => 
-                `animated-link py-1 px-1 lg:px-2 text-sm lg:text-base transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
-              }>
-                {t('navigation.about')}
-              </NavLink>
-              <NavLink to="/contact" className={({isActive}) => 
-                `animated-link py-1 px-1 lg:px-2 text-sm lg:text-base transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
-              }>
-                {t('navigation.contact')}
-              </NavLink>
+            <div className="hidden md:flex items-center space-x-1 lg:space-x-4">
+              {/* Visible navigation items */}
+              {navItems.map((item, index) => (
+                !shouldBeInDropdown(index) && (
+                  <NavLink 
+                    key={item.path}
+                    to={item.path} 
+                    className={({isActive}) => 
+                      `animated-link py-1 px-1 lg:px-2 text-xs lg:text-sm xl:text-base transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
+                )
+              ))}
+              
+              {/* "More" dropdown for overflow items */}
+              {itemsInDropdown > 0 && (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button 
+                      variant="ghost" 
+                      className="animated-link py-1 px-1 lg:px-2 text-xs lg:text-sm xl:text-base text-billman-white hover:text-billman-green hover:bg-transparent"
+                    >
+                      {t('navigation.more')}
+                      <ChevronDown className="ml-1 h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="bg-billman-dark border-billman-gray text-billman-white shadow-lg min-w-[120px] z-50">
+                    {navItems.map((item, index) => (
+                      shouldBeInDropdown(index) && (
+                        <DropdownMenuItem key={item.path} asChild className="focus:bg-billman-gray focus:text-billman-green">
+                          <NavLink 
+                            to={item.path}
+                            className={({isActive}) => 
+                              `w-full p-2 text-xs lg:text-sm rounded-md transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
+                            }
+                            onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            {item.label}
+                          </NavLink>
+                        </DropdownMenuItem>
+                      )
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
             </div>
           ) : null}
           
@@ -117,69 +173,18 @@ const Navbar = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden fixed inset-0 top-16 bg-billman-black px-4 py-6 flex flex-col z-40 animate-fade-in">
             <div className="flex flex-col space-y-4">
-              <NavLink 
-                to="/" 
-                className={({isActive}) => 
-                  `py-2 px-4 rounded-md transition-colors ${isActive ? 'bg-billman-dark text-billman-green' : 'text-white hover:bg-billman-dark'}`
-                }
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {t('navigation.home')}
-              </NavLink>
-              <NavLink 
-                to="/features" 
-                className={({isActive}) => 
-                  `py-2 px-4 rounded-md transition-colors ${isActive ? 'bg-billman-dark text-billman-green' : 'text-white hover:bg-billman-dark'}`
-                }
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {t('navigation.features')}
-              </NavLink>
-              <NavLink 
-                to="/pricing" 
-                className={({isActive}) => 
-                  `py-2 px-4 rounded-md transition-colors ${isActive ? 'bg-billman-dark text-billman-green' : 'text-white hover:bg-billman-dark'}`
-                }
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {t('navigation.pricing')}
-              </NavLink>
-              <NavLink 
-                to="/clubs" 
-                className={({isActive}) => 
-                  `py-2 px-4 rounded-md transition-colors ${isActive ? 'bg-billman-dark text-billman-green' : 'text-white hover:bg-billman-dark'}`
-                }
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {t('navigation.forClubs')}
-              </NavLink>
-              <NavLink 
-                to="/games" 
-                className={({isActive}) => 
-                  `py-2 px-4 rounded-md transition-colors ${isActive ? 'bg-billman-dark text-billman-green' : 'text-white hover:bg-billman-dark'}`
-                }
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {t('navigation.myGames')}
-              </NavLink>
-              <NavLink 
-                to="/about" 
-                className={({isActive}) => 
-                  `py-2 px-4 rounded-md transition-colors ${isActive ? 'bg-billman-dark text-billman-green' : 'text-white hover:bg-billman-dark'}`
-                }
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {t('navigation.about')}
-              </NavLink>
-              <NavLink 
-                to="/contact" 
-                className={({isActive}) => 
-                  `py-2 px-4 rounded-md transition-colors ${isActive ? 'bg-billman-dark text-billman-green' : 'text-white hover:bg-billman-dark'}`
-                }
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {t('navigation.contact')}
-              </NavLink>
+              {navItems.map((item) => (
+                <NavLink 
+                  key={item.path}
+                  to={item.path} 
+                  className={({isActive}) => 
+                    `py-2 px-4 rounded-md transition-colors ${isActive ? 'bg-billman-dark text-billman-green' : 'text-white hover:bg-billman-dark'}`
+                  }
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </NavLink>
+              ))}
               
               {isAuthenticated && (
                 <NavLink 
