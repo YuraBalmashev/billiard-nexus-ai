@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X, User, ChevronDown, MoreHorizontal } from 'lucide-react';
@@ -38,39 +37,78 @@ const Navbar = () => {
     { path: '/contact', label: t('navigation.contact') },
   ], [t]);
   
-  // State to track which items should be in the dropdown
-  const [itemsInDropdown, setItemsInDropdown] = useState<number>(0);
-  const [isMediumScreen, setIsMediumScreen] = useState<boolean>(false);
+  // Refs for nav container and items
+  const navContainerRef = useRef<HTMLDivElement>(null);
+  const navItemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   
-  // Check window size and adjust itemsInDropdown
-  useEffect(() => {
-    const handleResize = () => {
-      const windowWidth = window.innerWidth;
+  // State to track which items should be in the dropdown
+  const [visibleItems, setVisibleItems] = useState<number>(navItems.length);
+  const [showOverflow, setShowOverflow] = useState<boolean>(false);
+  
+  // Calculate available space and determine visible items
+  const calculateVisibleItems = () => {
+    if (isMobile || !navContainerRef.current) return;
+    
+    const containerWidth = navContainerRef.current.offsetWidth;
+    const rightSideWidth = 200; // Approximate width for language switcher, auth buttons
+    const moreButtonWidth = 80; // Approximate width for the "..." button
+    const availableWidth = containerWidth - rightSideWidth - moreButtonWidth;
+    
+    let totalWidth = 0;
+    let visibleCount = 0;
+    
+    // Calculate how many items can fit
+    navItemRefs.current.forEach((item, index) => {
+      if (!item) return;
       
-      // Set medium screen state (between mobile and full desktop)
-      setIsMediumScreen(windowWidth >= 700 && windowWidth < 900);
+      const itemWidth = item.offsetWidth + 16; // Add margin/padding
       
-      // Adjust how many items go in dropdown based on screen width
-      if (windowWidth >= 1280) { // xl
-        setItemsInDropdown(0); // All items visible
-      } else if (windowWidth >= 1024) { // lg
-        setItemsInDropdown(1); // Last item in dropdown
-      } else if (windowWidth >= 900) { // Medium-large screens
-        setItemsInDropdown(3); // Last 3 items in dropdown
-      } else if (windowWidth >= 700) { // Medium screens
-        setItemsInDropdown(5); // Only show 2 most important items
+      if (totalWidth + itemWidth <= availableWidth) {
+        totalWidth += itemWidth;
+        visibleCount++;
       }
+    });
+    
+    const needsOverflow = visibleCount < navItems.length;
+    setShowOverflow(needsOverflow);
+    setVisibleItems(needsOverflow ? visibleCount : navItems.length);
+  };
+
+  // Listen for window resize and recalculate
+  useEffect(() => {
+    if (isMobile) {
+      setShowOverflow(false);
+      return;
+    }
+    
+    const handleResize = () => {
+      calculateVisibleItems();
     };
     
-    handleResize(); // Initial check
+    handleResize(); // Initial calculation
+    
+    // Use ResizeObserver for more precise tracking
+    const resizeObserver = new ResizeObserver(() => {
+      handleResize();
+    });
+    
+    if (navContainerRef.current) {
+      resizeObserver.observe(navContainerRef.current);
+    }
+    
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [navItems.length]);
+    
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isMobile, navItems.length, navItemRefs.current.length]);
 
-  // Function to check if an item should be in the dropdown
-  const shouldBeInDropdown = (index: number) => {
-    return index >= navItems.length - itemsInDropdown;
-  };
+  // Update references when nav items change
+  useEffect(() => {
+    navItemRefs.current = navItemRefs.current.slice(0, navItems.length);
+    calculateVisibleItems();
+  }, [navItems]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -170,54 +208,48 @@ const Navbar = () => {
             
             {/* Desktop/Medium Navigation */}
             {!isMobile && (
-              <div className="hidden md:flex items-center space-x-1 lg:space-x-3">
+              <div ref={navContainerRef} className="hidden md:flex items-center space-x-1 lg:space-x-3">
                 {/* Visible navigation items */}
-                {navItems.map((item, index) => (
-                  !shouldBeInDropdown(index) && (
-                    <NavLink 
-                      key={item.path}
-                      to={item.path} 
-                      className={({isActive}) => 
-                        `animated-link py-1 px-1 lg:px-2 text-xs lg:text-sm xl:text-base transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
-                      }
-                    >
-                      {item.label}
-                    </NavLink>
-                  )
+                {navItems.slice(0, visibleItems).map((item, index) => (
+                  <NavLink 
+                    key={item.path}
+                    to={item.path} 
+                    ref={el => navItemRefs.current[index] = el}
+                    className={({isActive}) => 
+                      `animated-link py-1 px-1 lg:px-2 text-xs lg:text-sm xl:text-base transition-colors ${
+                        isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'
+                      }`
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
                 ))}
                 
-                {/* "More" dropdown for overflow items */}
-                {itemsInDropdown > 0 && (
+                {/* Overflow dropdown - only show when needed */}
+                {showOverflow && (
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button 
                         variant="ghost" 
-                        className="animated-link py-1 px-1 lg:px-2 text-xs lg:text-sm xl:text-base text-billman-white hover:text-billman-green hover:bg-transparent flex items-center gap-1"
+                        className="animated-link py-1 px-1 lg:px-2 text-xs lg:text-sm xl:text-base text-billman-white hover:text-billman-green hover:bg-transparent flex items-center"
                       >
-                        {isMediumScreen ? (
-                          <MoreHorizontal className="h-4 w-4" />
-                        ) : (
-                          <>
-                            {t('navigation.more')}
-                            <ChevronDown className="ml-1 h-3 w-3" />
-                          </>
-                        )}
+                        <MoreHorizontal className="h-4 w-4" />
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="bg-billman-dark border-billman-gray text-billman-white shadow-lg min-w-[120px] z-50">
-                      {navItems.map((item, index) => (
-                        shouldBeInDropdown(index) && (
-                          <DropdownMenuItem key={item.path} asChild className="focus:bg-billman-gray focus:text-billman-green">
-                            <NavLink 
-                              to={item.path}
-                              className={({isActive}) => 
-                                `w-full p-2 text-xs lg:text-sm rounded-md transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
-                              }
-                            >
-                              {item.label}
-                            </NavLink>
-                          </DropdownMenuItem>
-                        )
+                      {navItems.slice(visibleItems).map((item) => (
+                        <DropdownMenuItem key={item.path} asChild className="focus:bg-billman-gray focus:text-billman-green">
+                          <NavLink 
+                            to={item.path}
+                            className={({isActive}) => 
+                              `w-full p-2 text-xs lg:text-sm rounded-md transition-colors ${
+                                isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'
+                              }`
+                            }
+                          >
+                            {item.label}
+                          </NavLink>
+                        </DropdownMenuItem>
                       ))}
                     </DropdownMenuContent>
                   </DropdownMenu>
