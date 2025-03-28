@@ -5,9 +5,8 @@ export const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   const handleResize = useCallback(() => {
-    // Use 900px as the breakpoint to better handle intermediate tablet resolutions
-    // and to be consistent with the navbar overflow dropdown implementation
-    setIsMobile(window.innerWidth < 900);
+    // Use 700px as the breakpoint to match Apple's mobile navigation breakpoint
+    setIsMobile(window.innerWidth < 700);
   }, []);
 
   useEffect(() => {
