@@ -1,3 +1,4 @@
+
 {
   "navigation": {
     "home": "Главная",
@@ -89,7 +90,8 @@
     "search": "Поиск",
     "clear": "Очистить",
     "view": "Смотреть",
-    "details": "Подробнее"
+    "details": "Подробнее",
+    "opponents": "Оппоненты"
   },
   "homepage": {
     "hero": {

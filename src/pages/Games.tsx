@@ -10,6 +10,8 @@ import StorageCountdown from '@/components/games/StorageCountdown';
 import FavoriteButton from '@/components/games/FavoriteButton';
 import GamesFilter from '@/components/games/GamesFilter';
 import { GamesProvider, useGames } from '@/contexts/GamesContext';
+import { useAuth } from '@/contexts/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 const GamesGrid = () => {
   const {
@@ -19,6 +21,9 @@ const GamesGrid = () => {
     venueFilter,
     isGridView,
   } = useGames();
+  
+  const { user } = useAuth();
+  const { t } = useTranslation();
 
   // Filter games based on current filters
   const filteredGames = useMemo(() => {
@@ -105,16 +110,18 @@ const GamesGrid = () => {
               </div>
               
               <div className="mt-3">
-                <span className="text-sm text-billman-lightGray">Players</span>
+                <span className="text-sm text-billman-lightGray">{t('common.opponents')}</span>
                 <div className="flex flex-wrap gap-2 mt-1">
-                  {game.players.map((player, index) => (
-                    <span 
-                      key={index} 
-                      className="bg-billman-gray px-2 py-1 rounded-md text-xs text-white"
-                    >
-                      {player}
-                    </span>
-                  ))}
+                  {user && game.players
+                    .filter(player => player !== user.username) // Filter out the current user
+                    .map((player, index) => (
+                      <span 
+                        key={index} 
+                        className="bg-billman-gray px-2 py-1 rounded-md text-xs text-white"
+                      >
+                        {player}
+                      </span>
+                    ))}
                 </div>
               </div>
 

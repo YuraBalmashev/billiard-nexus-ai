@@ -1,3 +1,4 @@
+
 {
   "navigation": {
     "home": "Home",
@@ -89,7 +90,8 @@
     "search": "Search",
     "clear": "Clear",
     "view": "View",
-    "details": "Details"
+    "details": "Details",
+    "opponents": "Opponents"
   },
   "homepage": {
     "hero": {
