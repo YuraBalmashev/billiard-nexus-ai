@@ -36,6 +36,14 @@ const PlayerDashboardLayout = () => {
   // Only render the dashboard if authenticated
   if (!isAuthenticated) return null;
 
+  const handleMenuClick = () => {
+    // Find the sidebar trigger element and click it
+    const triggerElement = document.querySelector('[data-sidebar="trigger"]');
+    if (triggerElement instanceof HTMLElement) {
+      triggerElement.click();
+    }
+  };
+
   return (
     <SidebarProvider>
       <div className="bg-billman-black min-h-screen">
@@ -46,7 +54,7 @@ const PlayerDashboardLayout = () => {
                 variant="ghost" 
                 size="icon" 
                 className="text-billman-lightGray hover:text-white mr-4"
-                onClick={() => document.querySelector('[data-sidebar="trigger"]')?.click()}
+                onClick={handleMenuClick}
               >
                 <Menu size={24} />
                 <span className="sr-only">Toggle menu</span>
