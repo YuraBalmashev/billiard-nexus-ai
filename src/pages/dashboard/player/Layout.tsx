@@ -1,6 +1,6 @@
 
-import React from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/contexts/AuthContext';
 import PlayerDashboardSidebar from '@/components/dashboard/player/Sidebar';
@@ -8,11 +8,33 @@ import { SidebarProvider } from '@/components/ui/sidebar';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 
 const PlayerDashboardLayout = () => {
   const { t } = useTranslation();
-  const { user } = useAuth();
+  const { user, isAuthenticated, isLoading } = useAuth();
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check authentication after loading completes
+    if (!isLoading && !isAuthenticated) {
+      toast.error(t('auth.authRequired'));
+      navigate('/');
+    }
+  }, [isAuthenticated, isLoading, navigate, t]);
+
+  // Show loading state while checking authentication
+  if (isLoading) {
+    return (
+      <div className="bg-billman-black min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-billman-green"></div>
+      </div>
+    );
+  }
+
+  // Only render the dashboard if authenticated
+  if (!isAuthenticated) return null;
 
   return (
     <SidebarProvider>
