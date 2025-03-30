@@ -93,6 +93,17 @@
     "details": "Details",
     "opponents": "Opponents"
   },
+  "gameDetails": {
+    "matchResults": "Match Results",
+    "winner": "Winner",
+    "points": "points",
+    "yourGameStatistics": "Your Game Statistics",
+    "gameStatistics": "Game Statistics",
+    "totalShots": "Total Shots",
+    "successfulShots": "Successful Shots",
+    "missedShots": "Missed Shots",
+    "loginToSeeStats": "Please log in to see your personal statistics."
+  },
   "homepage": {
     "hero": {
       "tagline": "Revolutionizing Billiards with AI",

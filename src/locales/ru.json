@@ -93,6 +93,17 @@
     "details": "Подробнее",
     "opponents": "Оппоненты"
   },
+  "gameDetails": {
+    "matchResults": "Результаты матча",
+    "winner": "Победитель",
+    "points": "очков",
+    "yourGameStatistics": "Ваша игровая статистика",
+    "gameStatistics": "Статистика игры",
+    "totalShots": "Всего ударов",
+    "successfulShots": "Удачных ударов",
+    "missedShots": "Промахов",
+    "loginToSeeStats": "Пожалуйста, войдите, чтобы увидеть свою статистику."
+  },
   "homepage": {
     "hero": {
       "tagline": "Революция в бильярде с помощью ИИ",
