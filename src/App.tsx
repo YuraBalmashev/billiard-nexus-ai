@@ -29,43 +29,52 @@ const App = () => (
     <TooltipProvider>
       <BrowserRouter>
         <AuthProvider>
-          <Toaster />
-          <Sonner />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/features" element={<FeaturesPage />} />
-            <Route path="/pricing" element={<PricingPage />} />
-            <Route path="/clubs" element={<ClubsPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/games" element={<GamesPage />} />
-            <Route path="/games/:gameId" element={<GameDetailsPage />} />
-            <Route 
-              path="/profile" 
-              element={
-                <ProtectedRoute>
-                  <ProfilePage />
-                </ProtectedRoute>
-              } 
-            />
-            
-            {/* Player Dashboard Routes */}
-            <Route 
-              path="/dashboard/player" 
-              element={
-                <ProtectedRoute>
-                  <PlayerDashboardLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route index element={<PlayerDashboardOverview />} />
-              <Route path="games" element={<PlayerDashboardGames />} />
-              <Route path="settings" element={<PlayerDashboardSettings />} />
-            </Route>
-            
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <GamesProvider>
+            <Toaster />
+            <Sonner />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/features" element={<FeaturesPage />} />
+              <Route path="/pricing" element={<PricingPage />} />
+              <Route path="/clubs" element={<ClubsPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route 
+                path="/games" 
+                element={
+                  <ProtectedRoute>
+                    <GamesPage />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route path="/games/:gameId" element={<GameDetailsPage />} />
+              <Route 
+                path="/profile" 
+                element={
+                  <ProtectedRoute>
+                    <ProfilePage />
+                  </ProtectedRoute>
+                } 
+              />
+              
+              {/* Player Dashboard Routes */}
+              <Route 
+                path="/dashboard/player" 
+                element={
+                  <ProtectedRoute>
+                    <PlayerDashboardLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route index element={<PlayerDashboardOverview />} />
+                <Route path="games" element={<PlayerDashboardGames />} />
+                <Route path="settings" element={<PlayerDashboardSettings />} />
+              </Route>
+              
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </GamesProvider>
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>

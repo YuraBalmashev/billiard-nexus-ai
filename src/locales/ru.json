@@ -54,7 +54,12 @@
     "noRecentGames": "Недавних игр не найдено",
     "noFavoriteGames": "Избранных игр не найдено",
     "removeFromFavorites": "Удалить из избранного",
-    "vs": "против"
+    "vs": "против",
+    "backToSite": "Вернуться на сайт",
+    "deleteAccount": "Удалить аккаунт",
+    "deleteAccountConfirmation": "Вы уверены, что хотите удалить аккаунт? Это действие нельзя отменить.",
+    "cancel": "Отмена",
+    "confirmDeletion": "Подтвердить удаление"
   },
   "dashboard": {
     "player": {

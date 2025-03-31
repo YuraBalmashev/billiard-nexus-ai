@@ -7,6 +7,7 @@ import LanguageSwitcher from './LanguageSwitcher';
 import { useAuth } from '@/contexts/AuthContext';
 import AuthModal from '@/components/auth/AuthModal';
 import { useTranslation } from 'react-i18next';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -61,11 +62,13 @@ const Navbar = () => {
             }>
               {t('navigation.forClubs')}
             </NavLink>
-            <NavLink to="/games" className={({isActive}) => 
-              `animated-link py-2 transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
-            }>
-              {t('navigation.myGames')}
-            </NavLink>
+            {isAuthenticated && (
+              <NavLink to="/games" className={({isActive}) => 
+                `animated-link py-2 transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
+              }>
+                {t('navigation.myGames')}
+              </NavLink>
+            )}
             <NavLink to="/about" className={({isActive}) => 
               `animated-link py-2 transition-colors ${isActive ? 'text-billman-green' : 'text-billman-white hover:text-billman-green'}`
             }>
@@ -84,12 +87,16 @@ const Navbar = () => {
             {isAuthenticated ? (
               <Button 
                 variant="outline" 
-                className="border-billman-green text-billman-green hover:bg-billman-green/10"
+                className="border-billman-green text-billman-green hover:bg-billman-green/10 p-1"
                 asChild
               >
                 <Link to="/profile">
-                  <User size={16} className="mr-2" />
-                  {user?.username || t('navigation.profile')}
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage src={user?.avatar || '/placeholder.svg'} alt={user?.username || ''} />
+                    <AvatarFallback className="bg-billman-green/20 text-billman-green text-xs">
+                      {user?.username.substring(0, 2).toUpperCase() || 'U'}
+                    </AvatarFallback>
+                  </Avatar>
                 </Link>
               </Button>
             ) : (
@@ -147,15 +154,17 @@ const Navbar = () => {
               >
                 {t('navigation.forClubs')}
               </NavLink>
-              <NavLink 
-                to="/games" 
-                className={({isActive}) => 
-                  `py-2 px-4 rounded-md transition-colors ${isActive ? 'bg-billman-dark text-billman-green' : 'text-white hover:bg-billman-dark'}`
-                }
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {t('navigation.myGames')}
-              </NavLink>
+              {isAuthenticated && (
+                <NavLink 
+                  to="/games" 
+                  className={({isActive}) => 
+                    `py-2 px-4 rounded-md transition-colors ${isActive ? 'bg-billman-dark text-billman-green' : 'text-white hover:bg-billman-dark'}`
+                  }
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {t('navigation.myGames')}
+                </NavLink>
+              )}
               <NavLink 
                 to="/about" 
                 className={({isActive}) => 

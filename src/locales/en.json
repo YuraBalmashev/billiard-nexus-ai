@@ -54,7 +54,12 @@
     "noRecentGames": "No recent games found",
     "noFavoriteGames": "No favorite games found",
     "removeFromFavorites": "Remove from favorites",
-    "vs": "vs"
+    "vs": "vs",
+    "backToSite": "Back to site",
+    "deleteAccount": "Delete Account",
+    "deleteAccountConfirmation": "Are you sure you want to delete your account? This action cannot be undone.",
+    "cancel": "Cancel",
+    "confirmDeletion": "Confirm Deletion"
   },
   "dashboard": {
     "player": {

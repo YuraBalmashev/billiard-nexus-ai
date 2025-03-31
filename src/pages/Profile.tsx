@@ -1,25 +1,45 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useGames } from '@/contexts/GamesContext';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { 
+  Dialog, 
+  DialogTrigger, 
+  DialogContent, 
+  DialogHeader, 
+  DialogTitle, 
+  DialogDescription,
+  DialogFooter 
+} from '@/components/ui/dialog';
+import { 
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger
+} from "@/components/ui/alert-dialog";
 import LanguageSwitcher from '@/components/layout/LanguageSwitcher';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import { Eye, Heart, LogOut, User, Calendar, Star, Award } from 'lucide-react';
+import { Eye, Heart, LogOut, User, Calendar, Star, Award, ArrowLeft, Trash2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthModal from '@/components/auth/AuthModal';
 import { formatDistanceToNow } from 'date-fns';
 
 const Profile = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, deleteAccount } = useAuth();
   const { games, favoriteGames, toggleFavorite } = useGames();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   // Filter for recent games (latest 3)
   const recentGames = [...games]
@@ -53,13 +73,28 @@ const Profile = () => {
     );
   }
 
+  const handleDeleteAccount = () => {
+    setIsDeleteDialogOpen(false);
+    deleteAccount();
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-billman-black text-billman-white">
       <Navbar />
       
       <main className="flex-1 container mx-auto px-4 pt-24 pb-16">
         <div className="max-w-4xl mx-auto space-y-8">
-          <h1 className="text-3xl font-bold mb-8">{t('profile.myProfile')}</h1>
+          <div className="flex justify-between items-center">
+            <h1 className="text-3xl font-bold">{t('profile.myProfile')}</h1>
+            <Button 
+              variant="outline" 
+              className="border-billman-green/30 text-billman-white hover:bg-billman-green/10 hover:text-billman-green"
+              onClick={() => navigate('/')}
+            >
+              <ArrowLeft size={16} className="mr-2" />
+              {t('profile.backToSite')}
+            </Button>
+          </div>
           
           {/* User Information Section */}
           <Card className="bg-billman-dark/50 border-billman-green/20 text-billman-white">
@@ -273,7 +308,38 @@ const Profile = () => {
                   </Dialog>
                 </div>
                 
-                <div className="flex justify-end mt-6">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mt-6">
+                  <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+                    <AlertDialogTrigger asChild>
+                      <Button 
+                        variant="outline" 
+                        className="border-red-500/30 text-red-500 hover:bg-red-500/10"
+                      >
+                        <Trash2 size={16} className="mr-2" />
+                        {t('profile.deleteAccount')}
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent className="bg-billman-dark border-billman-green/20 text-billman-white">
+                      <AlertDialogHeader>
+                        <AlertDialogTitle className="text-red-500">{t('profile.deleteAccount')}</AlertDialogTitle>
+                        <AlertDialogDescription className="text-billman-lightGray">
+                          {t('profile.deleteAccountConfirmation')}
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter className="mt-4">
+                        <AlertDialogCancel className="border-billman-green/30 text-billman-white hover:bg-billman-green/10 hover:text-billman-green">
+                          {t('profile.cancel')}
+                        </AlertDialogCancel>
+                        <AlertDialogAction 
+                          className="bg-red-500 text-white hover:bg-red-600"
+                          onClick={handleDeleteAccount}
+                        >
+                          {t('profile.confirmDeletion')}
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                  
                   <Button 
                     variant="outline" 
                     className="border-billman-green/30 text-billman-white hover:bg-billman-green/10 hover:text-billman-green"

@@ -1,6 +1,6 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 interface User {
   id: string;
@@ -17,6 +17,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<boolean>;
   register: (username: string, email: string, password: string) => Promise<boolean>;
   logout: () => void;
+  deleteAccount: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -25,6 +26,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Store the path where login was initiated
+  const [lastPath, setLastPath] = useState<string | null>(null);
 
   // Check if user is already logged in
   useEffect(() => {
@@ -53,10 +58,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           setUser(mockUser);
           localStorage.setItem('billman_user', JSON.stringify(mockUser));
           
-          // Redirect to dashboard for players
-          if (mockUser.role === 'Player') {
-            navigate('/dashboard/player');
+          // Redirect back to the page where login was initiated or to profile
+          if (lastPath) {
+            navigate(lastPath);
+            setLastPath(null);
           } else {
+            // If no stored path, redirect to profile
             navigate('/profile');
           }
           
@@ -66,6 +73,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         }
       }, 800); // Simulate API delay
     });
+  };
+
+  // Store the current path when initiating login
+  const storeCurrentPath = () => {
+    // Don't store auth-related paths
+    if (!location.pathname.includes('/profile') && 
+        !location.pathname.includes('/dashboard')) {
+      setLastPath(location.pathname);
+    }
   };
 
   // Register function
@@ -86,12 +102,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           setUser(mockUser);
           localStorage.setItem('billman_user', JSON.stringify(mockUser));
           
-          // Redirect to dashboard for players
-          if (mockUser.role === 'Player') {
-            navigate('/dashboard/player');
-          } else {
-            navigate('/profile');
-          }
+          // Redirect to profile after registration
+          navigate('/profile');
           
           resolve(true);
         } else {
@@ -108,6 +120,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     navigate('/');
   };
 
+  // Delete account function
+  const deleteAccount = () => {
+    // In a real app, this would make an API call to delete the user's account
+    setUser(null);
+    localStorage.removeItem('billman_user');
+    navigate('/');
+  };
+
   return (
     <AuthContext.Provider 
       value={{ 
@@ -116,10 +136,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         isLoading,
         login,
         register,
-        logout
+        logout,
+        deleteAccount
       }}
     >
-      {children}
+      {React.Children.map(children, child => {
+        // Add storeCurrentPath to context so it can be accessed by AuthModal
+        if (React.isValidElement(child)) {
+          return React.cloneElement(child as React.ReactElement<any>, {
+            storeCurrentPath
+          });
+        }
+        return child;
+      })}
     </AuthContext.Provider>
   );
 };
@@ -130,4 +159,11 @@ export const useAuth = (): AuthContextType => {
     throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
+};
+
+// Export this function so it can be accessed outside the context
+export const useStoreCurrentPath = () => {
+  const context = useContext(AuthContext);
+  // @ts-ignore - we're adding this property in the provider
+  return context?.storeCurrentPath;
 };
