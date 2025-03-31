@@ -36,7 +36,25 @@
   },
   "profile": {
     "myProfile": "Мой профиль",
-    "language": "Язык"
+    "language": "Язык",
+    "userInformation": "Информация о пользователе",
+    "username": "Имя пользователя",
+    "email": "Эл. почта",
+    "memberSince": "Участник с",
+    "membershipStatus": "Тип подписки",
+    "premium": "Премиум",
+    "recentGames": "Недавние игры",
+    "favoriteGames": "Избранные игры",
+    "accountSettings": "Настройки аккаунта",
+    "resetPassword": "Сбросить пароль",
+    "resetPasswordDescription": "Вы получите инструкции для сброса пароля по электронной почте.",
+    "featureComingSoon": "Эта функция скоро появится!",
+    "viewDetails": "Подробнее",
+    "viewAllGames": "Смотреть все игры",
+    "noRecentGames": "Недавних игр не найдено",
+    "noFavoriteGames": "Избранных игр не найдено",
+    "removeFromFavorites": "Удалить из избранного",
+    "vs": "против"
   },
   "dashboard": {
     "player": {

@@ -36,7 +36,25 @@
   },
   "profile": {
     "myProfile": "My Profile",
-    "language": "Language"
+    "language": "Language",
+    "userInformation": "User Information",
+    "username": "Username",
+    "email": "Email",
+    "memberSince": "Member since",
+    "membershipStatus": "Membership",
+    "premium": "Premium",
+    "recentGames": "Recent Games",
+    "favoriteGames": "Favorite Games",
+    "accountSettings": "Account Settings",
+    "resetPassword": "Reset Password",
+    "resetPasswordDescription": "You will receive instructions to reset your password via email.",
+    "featureComingSoon": "This feature is coming soon!",
+    "viewDetails": "View Details",
+    "viewAllGames": "View All Games",
+    "noRecentGames": "No recent games found",
+    "noFavoriteGames": "No favorite games found",
+    "removeFromFavorites": "Remove from favorites",
+    "vs": "vs"
   },
   "dashboard": {
     "player": {
